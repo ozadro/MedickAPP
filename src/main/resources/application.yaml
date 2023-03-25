@@ -6,7 +6,7 @@ spring:
     banner-mode: OFF
   datasource:
     database: medickDB
-    db-schema: medick
+    db-schema: medickSchema
     url: "jdbc:postgresql://localhost:5432/${spring.datasource.database}"
     username: medick
     password: medick
