@@ -2,13 +2,12 @@ package hr.medick.medickapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class RegisterController {
+public class LoginController {
 
-    @GetMapping("/register")
+    @GetMapping("/login")
     public String registreIndex(){
-        return "register";
+        return "login";
     }
 }
