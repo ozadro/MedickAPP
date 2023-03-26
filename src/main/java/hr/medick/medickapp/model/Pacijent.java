@@ -12,16 +12,16 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "Pacijent")
+@Table(name = "pacijent")
 @Data
 public class Pacijent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IDPacijent")
+    @Column(name = "idpacijent")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "OsobaID", referencedColumnName = "IDOsoba", nullable = false)
+    @JoinColumn(name = "osobaid", referencedColumnName = "idosoba", nullable = false)
     private Osoba osoba;
 
 }

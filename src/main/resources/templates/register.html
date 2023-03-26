@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Medick</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
@@ -17,33 +17,34 @@
     <div class="column w-100">
         <h1 class="mb-3">Registracija</h1>
 
-        <form class="w-100">
+        <form class="w-100" method="post" action="/register" th:objecet="${newOsoba}">
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Ime" aria-label="Ime" aria-describedby="ime-field">
+                <input type="text" class="form-control" name="ime" placeholder="Ime" aria-label="Ime" aria-describedby="ime-field" required>
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Prezime" aria-label="Prezime"
-                       aria-describedby="prezime-field">
+                <input type="text" class="form-control" name="prezime" placeholder="Prezime" aria-label="Prezime"
+                       aria-describedby="prezime-field" required>
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Email" aria-label="Email"
-                       aria-describedby="email-field">
+                <input type="email" class="form-control" name="email" placeholder="Email" aria-label="Email"
+                       aria-describedby="email-field" required>
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Telefon" aria-label="Telefon"
-                       aria-describedby="telefon-field">
+                <input type="tel" class="form-control" name="telefon" placeholder="Telefon" aria-label="Telefon"
+                       aria-describedby="telefon-field" required>
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Adresa stanovanja i kućanski br."
-                       aria-label="adresa stanovanja" aria-describedby="adresaStanovanja-field">
+                <input type="text" class="form-control" name="adresaStanovanja" placeholder="Adresa stanovanja i kućanski br."
+                       aria-label="adresa stanovanja" aria-describedby="adresaStanovanja-field" required>
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Lozinka" aria-label="Lozinka"
-                       aria-describedby="lozinka-field">
+                <input type="password" class="form-control" name="lozinka" id="lozinka" placeholder="Lozinka" aria-label="Lozinka"
+                       aria-describedby="lozinka-field" required>
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Ponovno unesite lozinku"
-                       aria-label="Ponovno unesite lozinku" aria-describedby="lozinkaPonavljanje-field">
+                <input type="password" class="form-control" placeholder="Ponovno unesite lozinku" id="confirm_lozinka"
+                       aria-label="Ponovno unesite lozinku" aria-describedby="lozinkaPonavljanje-field" required>
+                <span id='error_confirm_lozinka'></span>
             </div>
 
             <button type="submit" class="btn text-light fw-medium fs-5 align-items-center justify-content-center"
@@ -63,5 +64,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js"
         integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i"
         crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script th:src="@{js/passwordValidation.js}"></script>
 </body>
 </html>
