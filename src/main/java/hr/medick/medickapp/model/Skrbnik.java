@@ -15,9 +15,13 @@ import lombok.Data;
 @Table(name="skrbnik")
 @Data
 public class Skrbnik {
+    public Skrbnik(Osoba osoba) {
+        this.osoba = osoba;
+    }
+    public Skrbnik() {}
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idosoba")
+    @Column(name = "idskrbnik")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

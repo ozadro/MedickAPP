@@ -12,7 +12,8 @@ public class OsobaService {
         this.osobaRepository = osobaRepository;
     }
 
-    public void saveOsoba(Osoba osoba){
+    public Long saveOsoba(Osoba osoba){
         osobaRepository.save(osoba);
+        return osoba.getId();
     }
 }
