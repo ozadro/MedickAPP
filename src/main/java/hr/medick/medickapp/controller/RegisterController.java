@@ -2,18 +2,20 @@ package hr.medick.medickapp.controller;
 
 import hr.medick.medickapp.model.Osoba;
 import hr.medick.medickapp.service.OsobaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class RegisterController {
 
-    @Autowired
     private OsobaService osobaService;
+
+    public RegisterController(OsobaService osobaService) {
+        this.osobaService = osobaService;
+    }
 
     @GetMapping("/register")
     public String registreIndex(){
@@ -23,6 +25,9 @@ public class RegisterController {
     @PostMapping("/register")
     public String saveOsoba(@ModelAttribute("newOsoba")Osoba osoba)
     {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(osoba.getLozinka());
+        osoba.setLozinka(encodedPassword);
         osobaService.saveOsoba(osoba);
         return "register";
     }
