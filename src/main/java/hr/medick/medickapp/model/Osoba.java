@@ -9,29 +9,29 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="Osoba")
+@Table(name="osoba")
 @Data
 public class Osoba {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IDOsoba")
+    @Column(name = "idosoba")
     private Long id;
 
-    @Column(name = "Ime")
+    @Column(name = "ime")
     private String ime;
 
-    @Column(name = "Prezime")
+    @Column(name = "prezime")
     private String prezime;
 
-    @Column(name = "Email")
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "Telefon")
+    @Column(name = "telefon")
     private String telefon;
 
-    @Column(name = "AdresaStanovanja")
+    @Column(name = "adresastanovanja")
     private String adresaStanovanja;
 
-    @Column(name = "Lozinka")
+    @Column(name = "lozinka")
     private String lozinka;
 }

@@ -11,34 +11,34 @@
 </head>
 <body>
 
-<!--<div  class="h-100 col-3">-->
+<!--<div  class="h-100 col-3">-->pacijent
 <div id="mainRegisterDiv"
      class="h-100 col-3 d-flex align-items-center justify-content-center position-absolute top-50 start-50 translate-middle ">
     <div class="column w-100">
         <h1 class="mb-3">Registracija</h1>
 
-        <form class="w-100">
+        <form class="w-100" method="post" action="/register" th:objecet="${newOsoba}">
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Ime" aria-label="Ime" aria-describedby="ime-field">
+                <input type="text" class="form-control" name="ime" placeholder="Ime" aria-label="Ime" aria-describedby="ime-field">
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Prezime" aria-label="Prezime"
+                <input type="text" class="form-control" name="prezime" placeholder="Prezime" aria-label="Prezime"
                        aria-describedby="prezime-field">
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Email" aria-label="Email"
+                <input type="text" class="form-control" name="email" placeholder="Email" aria-label="Email"
                        aria-describedby="email-field">
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Telefon" aria-label="Telefon"
+                <input type="text" class="form-control" name="telefon" placeholder="Telefon" aria-label="Telefon"
                        aria-describedby="telefon-field">
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Adresa stanovanja i kućanski br."
+                <input type="text" class="form-control" name="adresaStanovanja" placeholder="Adresa stanovanja i kućanski br."
                        aria-label="adresa stanovanja" aria-describedby="adresaStanovanja-field">
             </div>
             <div class="input-group registerInputField mb-2">
-                <input type="text" class="form-control" placeholder="Lozinka" aria-label="Lozinka"
+                <input type="text" class="form-control" name="lozinka" placeholder="Lozinka" aria-label="Lozinka"
                        aria-describedby="lozinka-field">
             </div>
             <div class="input-group registerInputField mb-2">
