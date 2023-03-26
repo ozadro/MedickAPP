@@ -1,7 +1,9 @@
 package hr.medick.medickapp.controller;
 
 import hr.medick.medickapp.model.Osoba;
+import hr.medick.medickapp.model.Skrbnik;
 import hr.medick.medickapp.service.OsobaService;
+import hr.medick.medickapp.service.SkrbnikService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegisterController {
 
-    private OsobaService osobaService;
+    private SkrbnikService skrbnikService;
 
-    public RegisterController(OsobaService osobaService) {
-        this.osobaService = osobaService;
+    public RegisterController(SkrbnikService skrbnikService) {
+        this.skrbnikService = skrbnikService;
     }
 
     @GetMapping("/register")
@@ -28,7 +30,8 @@ public class RegisterController {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(osoba.getLozinka());
         osoba.setLozinka(encodedPassword);
-        osobaService.saveOsoba(osoba);
+        Skrbnik skrbnik = new Skrbnik(osoba);
+        skrbnikService.saveSkrbnik(skrbnik);
         return "register";
     }
 }
