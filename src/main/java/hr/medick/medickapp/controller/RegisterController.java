@@ -1,6 +1,7 @@
 package hr.medick.medickapp.controller;
 
 import hr.medick.medickapp.model.Osoba;
+import hr.medick.medickapp.model.Skrbnik;
 import hr.medick.medickapp.service.OsobaService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ public class RegisterController {
         String encodedPassword = passwordEncoder.encode(osoba.getLozinka());
         osoba.setLozinka(encodedPassword);
         osobaService.saveOsoba(osoba);
+        Skrbnik skrbnik = new Skrbnik();
         return "register";
     }
 }

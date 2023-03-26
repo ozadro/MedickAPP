@@ -17,7 +17,7 @@ import lombok.Data;
 public class Skrbnik {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idosoba")
+    @Column(name = "idskrbnik")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

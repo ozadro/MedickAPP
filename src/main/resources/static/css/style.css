@@ -6,7 +6,7 @@ body {
     background-color: #ff4141;
     width: 100%;
 }
-.registerInputField > input[type=text] {
+.registerInputField > input {
     padding: 15px;
 }
 #mainRegisterDiv  p{
