@@ -1,8 +1,20 @@
 html,
 body {
-
 }
 
-#mainRegisterDiv{
-
+#mainRegisterBtn{
+    background-color: #ff4141;
+    width: 100%;
+}
+.registerInputField > input[type=text] {
+    padding: 15px;
+}
+#mainRegisterDiv  p{
+    margin-top: 15px;
+    color: rgba(0, 0, 0, 0.73);
+    text-align: center;
+}
+#mainRegisterDiv  a{
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.73);
 }
