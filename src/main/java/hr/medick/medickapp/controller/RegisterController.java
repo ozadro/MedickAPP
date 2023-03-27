@@ -2,7 +2,6 @@ package hr.medick.medickapp.controller;
 
 import hr.medick.medickapp.model.Osoba;
 import hr.medick.medickapp.model.Skrbnik;
-import hr.medick.medickapp.service.OsobaService;
 import hr.medick.medickapp.service.SkrbnikService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

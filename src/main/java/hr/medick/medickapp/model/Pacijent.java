@@ -15,6 +15,13 @@ import lombok.Data;
 @Table(name = "pacijent")
 @Data
 public class Pacijent {
+
+    public Pacijent(Osoba osoba) {
+        this.osoba = osoba;
+    }
+    public Pacijent() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idpacijent")
