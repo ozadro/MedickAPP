@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/mobileRegister")
 public class MobileRegisterController {
 
-    private PacijentService pacijentService;
+    private final PacijentService pacijentService;
 
     public MobileRegisterController(PacijentService pacijentService) {
         this.pacijentService = pacijentService;
@@ -26,6 +26,8 @@ public class MobileRegisterController {
         osoba.setLozinka(encodedPassword);
         Pacijent pacijent = new Pacijent(osoba);
         pacijentService.savePacijent(pacijent);
+
+        System.out.println(osoba);
 
         return new ResponseEntity<>("Data saved successfully", HttpStatus.OK);
     }

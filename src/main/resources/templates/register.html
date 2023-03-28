@@ -48,8 +48,10 @@
             </div>
 
             <button type="submit" class="btn text-light fw-medium fs-5 align-items-center justify-content-center"
-                    id="mainRegisterBtn">Register
+                    id="mainRegisterBtn">Registriraj se
             </button>
+            <h4 th:text="${Message}" id="messageSuccessful"></h4>
+            <h4 th:text="${ErrorMessage}" id="messageFailed"></h4>
         </form>
         <div class="w-100 d-flex align-items-center justify-content-center ">
             <p class="w-50">Ako već imate kreirani korisnički račun, možete se ulogirati <a href="login">ovdje</a></p>

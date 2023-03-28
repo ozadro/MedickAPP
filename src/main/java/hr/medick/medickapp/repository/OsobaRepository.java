@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface OsobaRepository extends JpaRepository<Osoba, Long> {
-        List<Osoba> findByEmailContaining(String email);
+        Osoba findByEmailContaining(String email);
 
 }
