@@ -11,7 +11,7 @@ public class PacijentService {
     @Autowired
     private OsobaService osobaService;
 
-    private PacijentRepository pacijentRepository;
+    private final PacijentRepository pacijentRepository;
 
     public PacijentService(PacijentRepository pacijentRepository) {
         this.pacijentRepository = pacijentRepository;
