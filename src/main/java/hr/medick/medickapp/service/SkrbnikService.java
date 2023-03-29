@@ -26,7 +26,10 @@ public class SkrbnikService {
     public Osoba getOsobaWithEmail(String email){
         return osobaService.getOsobaWithThatEmail(email);
     }
-    public List<Osoba> getAllOsoba(){
+    public List<Osoba> getAllOsobaSkrbnik(){
         return osobaService.getAllOsoba();
+    }
+    public boolean isSkrbnik(Long osobaid){
+        return skrbnikRepository.existsSkrbnikByOsobaId(osobaid);
     }
 }
