@@ -28,8 +28,6 @@ Create table if not exists skrbnikpacijent(
   idskrbnikpacijent serial PRIMARY KEY,
   skrbnikid int references skrbnik(idskrbnik) not null,
   pacijentid int references pacijent(idpacijent) not null
-
-
 );
 
 
