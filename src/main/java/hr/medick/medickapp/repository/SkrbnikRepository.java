@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface SkrbnikRepository extends JpaRepository<Skrbnik, Long> {
-
+    boolean existsSkrbnikByOsobaId(Long id);
 }

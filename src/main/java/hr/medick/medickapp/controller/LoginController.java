@@ -16,7 +16,7 @@ public class LoginController {
 
     private final SkrbnikService skrbnikService;
 
-    public LoginController(hr.medick.medickapp.service.SkrbnikService skrbnikService) {
+    public LoginController(SkrbnikService skrbnikService) {
         this.skrbnikService = skrbnikService;
     }
     @GetMapping("/login")
@@ -26,7 +26,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String authOsoba(@RequestParam("email") String email, @RequestParam("lozinka") String lozinka, Model model){
-        List<Osoba> osobaList = skrbnikService.getAllOsoba();
+        List<Osoba> osobaList = skrbnikService.getAllOsobaSkrbnik();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         if (osobaList.isEmpty()) {
@@ -34,7 +34,9 @@ public class LoginController {
         } else {
         for (Osoba trazenaOsoba : osobaList) {
             if (trazenaOsoba.getEmail().trim().equals(email.trim()) && passwordEncoder.matches(lozinka.trim(), trazenaOsoba.getLozinka().trim())) {
+                if (skrbnikService.isSkrbnik(trazenaOsoba.getId())){
                 return "redirect:/main";
+                }
             } else {
                 model.addAttribute("ErrorMessage", "Prijva neuspješna, pogrešni podaci o prijavi!");
                 model.addAttribute("Message", "");

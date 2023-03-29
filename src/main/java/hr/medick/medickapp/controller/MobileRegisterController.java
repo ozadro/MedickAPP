@@ -25,10 +25,17 @@ public class MobileRegisterController {
         String encodedPassword = passwordEncoder.encode(osoba.getLozinka());
         osoba.setLozinka(encodedPassword);
         Pacijent pacijent = new Pacijent(osoba);
-        pacijentService.savePacijent(pacijent);
+
+        Osoba osobaWithEmail = pacijentService.getOsobaWithEmail(osoba.getEmail());
+
+        if (osobaWithEmail == null){
+            pacijentService.savePacijent(pacijent);
+        } else {
+            return new ResponseEntity<>("EmailAlreadyExists", HttpStatus.OK);
+        }
 
         System.out.println(osoba);
 
-        return new ResponseEntity<>("Data saved successfully", HttpStatus.OK);
+        return new ResponseEntity<>("DataSavedSuccessfully", HttpStatus.OK);
     }
 }
