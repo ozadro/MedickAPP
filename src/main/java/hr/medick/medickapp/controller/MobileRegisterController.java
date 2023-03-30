@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/mobileRegister")
 public class MobileRegisterController {
 
-    private PacijentService pacijentService;
+    private final PacijentService pacijentService;
 
     public MobileRegisterController(PacijentService pacijentService) {
         this.pacijentService = pacijentService;
@@ -25,8 +25,17 @@ public class MobileRegisterController {
         String encodedPassword = passwordEncoder.encode(osoba.getLozinka());
         osoba.setLozinka(encodedPassword);
         Pacijent pacijent = new Pacijent(osoba);
-        pacijentService.savePacijent(pacijent);
 
-        return new ResponseEntity<>("Data saved successfully", HttpStatus.OK);
+        Osoba osobaWithEmail = pacijentService.getOsobaWithEmail(osoba.getEmail());
+
+        if (osobaWithEmail == null){
+            pacijentService.savePacijent(pacijent);
+        } else {
+            return new ResponseEntity<>("EmailAlreadyExists", HttpStatus.OK);
+        }
+
+        System.out.println(osoba);
+
+        return new ResponseEntity<>("DataSavedSuccessfully", HttpStatus.OK);
     }
 }
