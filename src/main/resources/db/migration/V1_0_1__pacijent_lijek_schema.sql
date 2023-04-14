@@ -1,7 +1,7 @@
 CREATE TABLE if not exists lijek (
     idlijek serial primary key  ,
     naziv varchar(255) NOT NULL ,
-    proizvodac varchar(255) NOT NULL
+    proizvodac varchar(255) NULL
 );
 
 CREATE TABLE if not exists vitali (
