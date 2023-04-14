@@ -17,7 +17,7 @@ CREATE TABLE if not exists terapija (
      idterapija serial primary key ,
      lijekid int references lijek(idlijek) not null,
      pacijentid int references pacijent(idpacijent) not null,
-     vitaliid int references vitali (idvitali) not null,
+     vitaliid int references vitali (idvitali) null,
      kolicina int NOT NULL,
      ponavljanja float not null
 
