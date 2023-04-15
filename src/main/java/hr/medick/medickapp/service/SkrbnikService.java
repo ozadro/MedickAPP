@@ -3,18 +3,17 @@ package hr.medick.medickapp.service;
 import hr.medick.medickapp.model.Osoba;
 import hr.medick.medickapp.model.Skrbnik;
 import hr.medick.medickapp.repository.SkrbnikRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class SkrbnikService {
-    @Autowired
-    private OsobaService osobaService;
+    private final OsobaService osobaService;
     private final SkrbnikRepository skrbnikRepository;
 
-    public SkrbnikService(SkrbnikRepository skrbnikRepository) {
+    public SkrbnikService(OsobaService osobaService, SkrbnikRepository skrbnikRepository) {
+        this.osobaService = osobaService;
         this.skrbnikRepository = skrbnikRepository;
     }
 
