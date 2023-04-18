@@ -4,8 +4,6 @@ import hr.medick.medickapp.model.Lijek;
 import hr.medick.medickapp.repository.LijekRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class LijekService {
 
@@ -15,13 +13,15 @@ public class LijekService {
         this.lijekRepository = lijekRepository;
     }
 
-    public void saveLijek(Lijek lijek){
+    public void saveLijek(Lijek lijek) {
         lijekRepository.save(lijek);
     }
 
-    public List<Lijek> getAllLijek(){
-        return lijekRepository.findAll();
+    public boolean existsLijekByName(String imeLijek){
+        return lijekRepository.existsLijekByNaziv(imeLijek);
     }
 
-
+    public Lijek getLijekByName(String imeLijek){
+        return lijekRepository.findLijekByNaziv(imeLijek);
+    }
 }
