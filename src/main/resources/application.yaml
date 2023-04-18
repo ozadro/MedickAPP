@@ -7,7 +7,7 @@ spring:
   datasource:
     database: medickDB
     db-schema: medickschema
-    url: "jdbc:postgresql://localhost:5432/${spring.datasource.database}"
+    url: "jdbc:postgresql://localhost:5432/${spring.datasource.database}?currentSchema=${spring.datasource.db-schema}&user=${spring.datasource.username}&password=${spring.datasource.password}"
     username: medick
     password: medick
     hikari:
