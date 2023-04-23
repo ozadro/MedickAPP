@@ -3,24 +3,24 @@ package hr.medick.medickapp.service;
 import hr.medick.medickapp.model.Osoba;
 import hr.medick.medickapp.model.Pacijent;
 import hr.medick.medickapp.repository.PacijentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PacijentService {
 
-    @Autowired
-    private OsobaService osobaService;
+    private final OsobaService osobaService;
 
     private final PacijentRepository pacijentRepository;
 
-    public PacijentService(PacijentRepository pacijentRepository) {
+    public PacijentService(OsobaService osobaService, PacijentRepository pacijentRepository) {
+        this.osobaService = osobaService;
         this.pacijentRepository = pacijentRepository;
     }
 
-    public void savePacijent(Pacijent pacijent){
+    public void savePacijent(Pacijent pacijent) {
         Long osobaID = osobaService.saveOsoba(pacijent.getOsoba());
         pacijent.getOsoba().setId(osobaID);
         pacijentRepository.save(pacijent);
@@ -36,5 +36,9 @@ public class PacijentService {
 
     public Osoba getOsobaWithEmail(String email) {
         return osobaService.getOsobaWithThatEmail(email);
+    }
+
+    public Pacijent getPacijentById(Long id){
+        return pacijentRepository.findPacijentById(id);
     }
 }

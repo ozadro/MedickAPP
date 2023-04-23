@@ -31,7 +31,7 @@ public class MobileRegisterController {
         if (osobaWithEmail == null){
             pacijentService.savePacijent(pacijent);
         } else {
-            return new ResponseEntity<>("EmailAlreadyExists", HttpStatus.OK);
+            return new ResponseEntity<>("EmailAlreadyExists", HttpStatus.ALREADY_REPORTED);
         }
 
         System.out.println(osoba);

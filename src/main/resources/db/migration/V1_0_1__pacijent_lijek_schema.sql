@@ -1,7 +1,7 @@
 CREATE TABLE if not exists lijek (
     idlijek serial primary key  ,
     naziv varchar(255) NOT NULL ,
-    proizvodac varchar(255) NOT NULL
+    proizvodac varchar(255) NULL
 );
 
 CREATE TABLE if not exists vitali (
@@ -17,17 +17,17 @@ CREATE TABLE if not exists terapija (
      idterapija serial primary key ,
      lijekid int references lijek(idlijek) not null,
      pacijentid int references pacijent(idpacijent) not null,
-     vitaliid int references vitali (idvitali) not null,
-     kolicina int NOT NULL,
-     ponavljanja float not null
-
+     vitaliid int references vitali (idvitali) null,
+     dozalijeka varchar(255) NOT NULL,
+     ponavljanja float not null,
+     prvadoza date NOT NULL,
+     kolicinatableta int not null,
+     kolicinadnevno int not null
 );
-
 
 
 create table if not exists podsjetnik(
     idpodsjetnik serial primary key,
     terapijaid int references terapija(idterapija) not null,
-    prvadoza date NOT NULL,
     uzet boolean not null
 );
