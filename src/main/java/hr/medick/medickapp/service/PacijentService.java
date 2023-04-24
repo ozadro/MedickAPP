@@ -33,6 +33,8 @@ public class PacijentService {
         return pacijentRepository.existsPacijentByOsobaId(osobaid);
     }
 
+    public List<Pacijent> getAllPacijent(){return pacijentRepository.findAll();}
+
     public Osoba getOsobaWithEmail(String email) {
         return osobaService.getOsobaWithThatEmail(email);
     }

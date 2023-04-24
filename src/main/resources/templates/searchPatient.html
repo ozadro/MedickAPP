@@ -11,15 +11,6 @@
   <input type="text" name="email" id="search-input" placeholder="Pretraži pacijenta po emailu">
   <button type="submit">Pretraži</button>
   <table>
-   <tr th:each="o : ${osoba}" th:field="${o}">
-      <td th:text="${o.ime}"></td>
-      <td th:text="${o.prezime}"></td>
-      <td th:text="${o.telefon}"></td>
-      <td th:text="${o.email}"></td>
-     <td>
-       <a th:href="@{addPatient.html}">Dodaj</a>
-     </td>
-   </tr>
       <tr th:each="o : ${osobaList}">
           <td th:text="${o.ime}"></td>
           <td th:text="${o.prezime}"></td>
@@ -29,9 +20,8 @@
               <a th:href="@{addPatient.html}">Dodaj</a>
           </td>
       </tr>
-
   </table>
-    <p th:value="${error}"></p>
+      <p th:text="${error}"></p>
 </form>
 </div>
 </body>
