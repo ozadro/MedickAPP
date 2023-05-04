@@ -32,10 +32,10 @@ public class SearchPacijentController {
         this.skrbnikPacijentService = skrbnikPacijentService;
     }
 
-    @GetMapping("/searchPatient.html")
+    @GetMapping("/searchPatient")
     public String searchIndex(){return "searchPatient";}
 
-    @PostMapping("/foundPatient.html")
+    @PostMapping("/foundPatient")
     public String searchPatient(@ModelAttribute("email")String email, Model model){
         String errorMsg = "Unijeli ste nepostojeći E-mail, pokušajte ponovno.";
         try {
@@ -70,7 +70,7 @@ public class SearchPacijentController {
 }
 
 
-    @PostMapping("/savePatient.html")
+    @PostMapping("/savePatient")
     public String savePatient(@RequestParam("email")String email, Model model){
         Pacijent pacijent = pacijentService.findPacijentByOsobaEmail(email);
         Skrbnik skrbnik = skrbnikService.getAllSkrbnik().get(0);
@@ -79,15 +79,12 @@ public class SearchPacijentController {
         skrbnikPacijent.setPacijent(pacijent);
         skrbnikPacijent.setSkrbnik(skrbnik);
 
-
         if (!skrbnikPacijentService.existsSkrbnikPacijentByPacijentId(pacijent.getId())){
             skrbnikPacijentService.saveSkrbnikPacijent(skrbnikPacijent);
         }else{
             String msg = "Odabrani pacijent ima skrbnika!";
             model.addAttribute("msg",msg);
         }
-
-
         return "searchPatient";
 
     }

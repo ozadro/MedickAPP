@@ -22,7 +22,7 @@ public class ViewPatientController {
         this.terapijaService = terapijaService;
     }
 
-    @GetMapping("/viewPatient.html")
+    @GetMapping("/viewPatient")
     public String viewPatient(@RequestParam(name = "show")String email, Model model){
         Pacijent pacijent = pacijentService.findPacijentByOsobaEmail(email);
         List<Terapija> terapijaList = terapijaService.getTerapijaListById(pacijent.getId());

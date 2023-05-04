@@ -13,7 +13,7 @@
             <td th:text="${o.telefon}"></td>
             <td th:text="${o.email}"></td>
             <td>
-                <form th:action="@{/viewPatient.html}" method="get">
+                <form th:action="@{/viewPatient}" method="get">
                     <input type="hidden" name="show" th:value="${o.email}"/>
                     <button type="submit" >Pregled Pacijenta</button>
                 </form>

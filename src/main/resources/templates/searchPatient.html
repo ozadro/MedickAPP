@@ -7,13 +7,12 @@
 <body>
 <div>
   <h2>Search Patient: </h2>
-  <form th:action="@{/foundPatient.html}" method="post">
+  <form th:action="@{/foundPatient}" method="post">
       <label>
           <input type="email" name="email"  placeholder="Pretraži pacijenta po emailu"/>
       </label>
-      <button type="submit" >Pretraži</button>
+      <button type="submit">Pretraži</button>
   </form>
-
   <table>
       <tr th:each="o : ${osobaList}">
           <td th:text="${o.ime}"></td>
@@ -21,10 +20,9 @@
           <td th:text="${o.telefon}"></td>
           <td th:text="${o.email}"></td>
           <td>
-              <form th:action="@{/savePatient.html}" method="post">
+              <form th:action="@{/savePatient}" method="post">
                   <input type="hidden" name="email" th:value="${o.email}"/>
                   <button type="submit">Dodaj</button>
-
               </form>
           </td>
       </tr>
