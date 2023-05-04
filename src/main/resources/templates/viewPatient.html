@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div th:object="${pacijent}">
+        <h4 th:text="*{getOsoba().ime + ' ' +getOsoba().prezime} "></h4>
+    </div>
+  <table>
+        <tr th:each="t : ${terapija}">
+             <td th:text="${t.getLijek().getNaziv()}"></td>
+             <td th:text="${t.getPrvadoza()}"></td>
+             <td th:text="${t.getDozalijeka()}"></td>
+             <td th:text="${t.getKolicinadnevno()}"></td>
+              <td th:text="${t.getKolicinatableta()}"></td>
+             <td th:text="${t.getPonavljanja()}"></td>
+        </tr>
+  </table>
+</div>
+</body>
+</html>

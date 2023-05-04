@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr th:each="o : ${osobaList}">
+            <td th:text="${o.ime}"></td>
+            <td th:text="${o.prezime}"></td>
+            <td th:text="${o.telefon}"></td>
+            <td th:text="${o.email}"></td>
+            <td>
+                <form th:action="@{/viewPatient}" method="get">
+                    <input type="hidden" name="show" th:value="${o.email}"/>
+                    <button type="submit" >Pregled Pacijenta</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
