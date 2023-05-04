@@ -1,10 +1,10 @@
 package hr.medick.medickapp.controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import hr.medick.medickapp.model.*;
+import hr.medick.medickapp.model.Lijek;
+import hr.medick.medickapp.model.Pacijent;
+import hr.medick.medickapp.model.Podsjetnik;
+import hr.medick.medickapp.model.Terapija;
 import hr.medick.medickapp.service.LijekService;
 import hr.medick.medickapp.service.PacijentService;
 import hr.medick.medickapp.service.PodsjetnikService;
@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.io.ObjectStreamClass;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,11 +22,10 @@ import java.util.Date;
 @RestController
 @RequestMapping("/mobileSaveNewReminder")
 public class MobileNewReminderController {
-
+    boolean secondTimeSaveSamePacijent = false;
     private final LijekService lijekService;
     private final TerapijaService terapijaService;
     private final PacijentService pacijentService;
-
     private final PodsjetnikService podsjetnikService;
 
     public MobileNewReminderController(LijekService lijekService, TerapijaService terapijaService, PacijentService pacijentService, PodsjetnikService podsjetnikService) {
@@ -47,22 +44,30 @@ public class MobileNewReminderController {
             @RequestParam("satiRazmaka") String satiRazmaka,
             @RequestParam("datumPrvogUzimanja") String datumPrvogUzimanja,
             @RequestParam("osobaPacijentId") String osobaPacijentId
-    ) throws ParseException, JsonProcessingException {
-
-        saveNewLijek(imeLijeka);
-
-        Pacijent pacijent = getPacijentFromId(osobaPacijentId);
-
-        Lijek lijek = getLijekFromName(imeLijeka);
-
-        Terapija newTerapija = saveNewTerapija(lijek, pacijent, dozaLijeka, satiRazmaka, putaDnevno, tableta, datumPrvogUzimanja);
-
+    ) throws ParseException {
         Podsjetnik podsjetnik = new Podsjetnik();
 
-        podsjetnik.setTerapija(newTerapija);
-        podsjetnik.setUzet(false);
+        if (!secondTimeSaveSamePacijent) {
 
-        podsjetnikService.savePodsjetnik(podsjetnik);
+            saveNewLijek(imeLijeka);
+
+            Pacijent pacijent = getPacijentFromId(osobaPacijentId);
+
+            Lijek lijek = getLijekFromName(imeLijeka);
+
+            Terapija newTerapija = saveNewTerapija(lijek, pacijent, dozaLijeka, satiRazmaka, putaDnevno, tableta, datumPrvogUzimanja);
+
+            podsjetnik.setTerapija(newTerapija);
+            podsjetnik.setUzet(false);
+
+            podsjetnikService.savePodsjetnik(podsjetnik);
+
+            secondTimeSaveSamePacijent = true;
+
+            return new ResponseEntity<>(podsjetnik, HttpStatus.OK);
+        }
+
+        secondTimeSaveSamePacijent = false;
 
         return new ResponseEntity<>(podsjetnik, HttpStatus.OK);
 
@@ -76,9 +81,12 @@ public class MobileNewReminderController {
         return pacijentService.getPacijentById(Long.valueOf(osobaPacijentId));
     }
 
-    private Terapija saveNewTerapija(Lijek lijeka, Pacijent pacijent, String dozaLijeka, String satiRazmaka, String putaDnevno,
+    private Terapija saveNewTerapija(Lijek lijeka, Pacijent pacijent,
+                                     String dozaLijeka,
+                                     String satiRazmaka,
+                                     String putaDnevno,
                                      String tableta,
-                                     String datumPrvogUzimanja) throws ParseException, JsonProcessingException {
+                                     String datumPrvogUzimanja) throws ParseException {
 
         Terapija terapija = new Terapija();
         terapija.setLijek(lijeka);
