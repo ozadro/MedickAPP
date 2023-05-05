@@ -17,7 +17,7 @@ public class ShowPacijentController {
         this.skrbnikPacijentService = skrbnikPacijentService;
     }
 
-    @GetMapping("/showPatient.html")
+    @GetMapping("/showPatient")
     public String showPatient(Model model){
         List<Osoba> osobaList = new ArrayList<>();
         List<Pacijent> pacijentList =  skrbnikPacijentService.getAllPacijentsForSkrbnik((long)1);
