@@ -25,4 +25,8 @@ public class OsobaService {
     public List<Osoba> getAllOsoba(){
         return osobaRepository.findAll();
     }
+    public List<Osoba> getOsobaByIme(String query){return osobaRepository.findOsobasByIme(query);}
+    public List<Osoba> getOsobaByPrezime(String query){return osobaRepository.findOsobasByPrezime(query);}
+    public List<Osoba> getOsobasByImeAndPrezime(String name, String lastName){return osobaRepository.findOsobasByImeAndPrezime(name,lastName);}
+
 }

@@ -33,37 +33,61 @@ public class SearchPacijentController {
     }
 
     @GetMapping("/searchPatient")
-    public String searchIndex(){return "searchPatient";}
+    public String searchIndex(Model model){
+        List<Osoba> osobaList = new ArrayList<>();
+            for (Pacijent pacijent : pacijentService.getAllPacijent()) {
+                osobaList.add(pacijent.getOsoba());
+            }
+            model.addAttribute("osobaList",osobaList);
+
+        return "searchPatient";
+    }
 
     @PostMapping("/foundPatient")
-    public String searchPatient(@ModelAttribute("email")String email, Model model){
-        String errorMsg = "Unijeli ste nepostojeći E-mail, pokušajte ponovno.";
+    public String searchPatient(@ModelAttribute("keyword")String keyword, Model model){
+        String errorMsg = "Unijeli ste nepostojećeg pacijenta, pokušajte ponovno.";
+
         try {
-            if (email.isEmpty()) {
-                List<Osoba> osobaList = new ArrayList<>();
-                for (Pacijent pacijent : pacijentService.getAllPacijent()) {
-                    osobaList.add(pacijent.getOsoba());
-                }
-                model.addAttribute("osobaList", osobaList);
+            if (keyword.isEmpty()) {
+//                List<Osoba> osobaList = new ArrayList<>();
+//                for (Pacijent pacijent : pacijentService.getAllPacijent()) {
+//                    osobaList.add(pacijent.getOsoba());
+//                }
+                model.addAttribute("errorMissing", "Unesite podatke o pacijentu.");
 
             } else {
 
-                if (pacijentService.isPacijent(osobaService.getOsobaWithThatEmail(email).getId())) {
-                    List<Pacijent> pacijentList = new ArrayList<>();
-                    pacijentList.add(pacijentService.findPacijentByOsobaEmail(email));
-                    List<Osoba> osobaList = new ArrayList<>();
-                    for (Pacijent pacijent : pacijentList){
-                        osobaList.add(pacijent.getOsoba());
-                        model.addAttribute("osobaList", osobaList);
+                List<Osoba> people = new ArrayList<>();
+
+                for (Osoba osoba : osobaService.getOsobaByIme(keyword)){
+                    if (pacijentService.isPacijent(osoba.getId())){
+                        people.add(osoba);
+                    }
+
+                }
+                for (Osoba osoba : osobaService.getOsobaByPrezime(keyword)){
+                    if (pacijentService.isPacijent(osoba.getId())){
+                        people.add(osoba);
+                    }
+                }
+
+               String[] splitKeyword = keyword.split(" ");
+
+                for (Osoba osoba : osobaService.getOsobasByImeAndPrezime(splitKeyword[0], splitKeyword[1])){
+                    if (pacijentService.isPacijent(osoba.getId())){
+                        people.add(osoba);
+                    }
+                }
+                if (!people.isEmpty()){
+                    for (Osoba osoba : people){
+                        model.addAttribute("osobaList", osoba);
                     }
                 }else {
-                    System.out.println(errorMsg);
                     model.addAttribute("error", errorMsg);
                 }
             }
         }
-        catch (NullPointerException exception){
-            System.out.println(errorMsg);
+        catch (Exception exception){
             model.addAttribute("error", errorMsg);
         }
     return "searchPatient";
@@ -86,6 +110,5 @@ public class SearchPacijentController {
             model.addAttribute("msg",msg);
         }
         return "searchPatient";
-
     }
 }

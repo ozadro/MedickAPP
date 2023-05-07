@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface OsobaRepository extends JpaRepository<Osoba, Long> {
         Osoba findByEmailContaining(String email);
-
+        List<Osoba> findOsobasByIme(String query);
+        List<Osoba> findOsobasByPrezime(String query);
+        List<Osoba> findOsobasByImeAndPrezime(String ime, String prezime);
 }

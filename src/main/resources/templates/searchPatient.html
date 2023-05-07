@@ -9,7 +9,7 @@
   <h2>Search Patient: </h2>
   <form th:action="@{/foundPatient}" method="post">
       <label>
-          <input type="email" name="email"  placeholder="Pretraži pacijenta po emailu"/>
+          <input type="text" name="keyword"  placeholder="Pretaži pacijenta po imenu ili prezimenu"/>
       </label>
       <button type="submit">Pretraži</button>
   </form>
@@ -28,6 +28,7 @@
       </tr>
   </table>
       <p th:text="${error}"></p>
+      <p th:text="${errorMissing}"></p>
       <p th:text="${msg}"></p>
 </div>
 </body>
