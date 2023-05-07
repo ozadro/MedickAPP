@@ -32,4 +32,8 @@ public class SkrbnikService {
     public boolean isSkrbnik(Long osobaid){
         return skrbnikRepository.existsSkrbnikByOsobaId(osobaid);
     }
+
+    public Skrbnik getSkrbnikById(Long id){ return skrbnikRepository.findSkrbnikById(id);}
+    public Skrbnik getSkrbnikByEmail(String email){return skrbnikRepository.findSkrbnikByOsobaEmail(email);}
+
 }

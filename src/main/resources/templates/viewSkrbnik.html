@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <table th:object="${skrbnik}">
+        <tr>
+            <td th:text="*{ime}"></td>
+        </tr>
+        <tr>
+            <td th:text="*{prezime}"></td>
+    </tr>
+        <tr>
+            <td th:text="*{email}"></td>
+    </tr>
+        <tr>
+            <td th:text="*{telefon}"></td>
+        </tr>
+        <tr>
+            <td th:text="*{adresaStanovanja}"></td>
+    </tr>
+        <tr>
+            <td>
+                <form th:action="@{/editSkrbnik}" method="get">
+                    <input type="hidden" name="show" th:value="${skrbnik.email}"/>
+                    <button type="submit" >Uredi Profil</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
