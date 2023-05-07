@@ -49,30 +49,20 @@ public class SearchPacijentController {
 
         try {
             if (keyword.isEmpty()) {
-//                List<Osoba> osobaList = new ArrayList<>();
-//                for (Pacijent pacijent : pacijentService.getAllPacijent()) {
-//                    osobaList.add(pacijent.getOsoba());
-//                }
                 model.addAttribute("errorMissing", "Unesite podatke o pacijentu.");
-
             } else {
-
                 List<Osoba> people = new ArrayList<>();
-
                 for (Osoba osoba : osobaService.getOsobaByIme(keyword)){
                     if (pacijentService.isPacijent(osoba.getId())){
                         people.add(osoba);
                     }
-
                 }
                 for (Osoba osoba : osobaService.getOsobaByPrezime(keyword)){
                     if (pacijentService.isPacijent(osoba.getId())){
                         people.add(osoba);
                     }
                 }
-
                String[] splitKeyword = keyword.split(" ");
-
                 for (Osoba osoba : osobaService.getOsobasByImeAndPrezime(splitKeyword[0], splitKeyword[1])){
                     if (pacijentService.isPacijent(osoba.getId())){
                         people.add(osoba);
