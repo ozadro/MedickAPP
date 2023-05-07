@@ -6,7 +6,6 @@ import hr.medick.medickapp.repository.PacijentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PacijentService {
@@ -34,11 +33,18 @@ public class PacijentService {
         return pacijentRepository.existsPacijentByOsobaId(osobaid);
     }
 
+    public List<Pacijent> getAllPacijent(){return pacijentRepository.findAll();}
+
     public Osoba getOsobaWithEmail(String email) {
         return osobaService.getOsobaWithThatEmail(email);
     }
 
     public Pacijent getPacijentById(Long id){
         return pacijentRepository.findPacijentById(id);
+    }
+
+    public Pacijent findPacijentByOsobaEmail(String email){
+        Osoba osoba = osobaService.getOsobaWithThatEmail(email);
+        return pacijentRepository.findPacijentByOsoba(osoba);
     }
 }

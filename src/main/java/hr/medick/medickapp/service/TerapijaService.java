@@ -19,7 +19,7 @@ public class TerapijaService {
         terapijaRepository.save(terapija);
     }
 
-    public List<Terapija> getTerapijaListById(Long Id){
+    public List<Terapija> getTerapijaListById(Long Id) {
         return terapijaRepository.getTerapijasByPacijentId(Id);
     }
 }

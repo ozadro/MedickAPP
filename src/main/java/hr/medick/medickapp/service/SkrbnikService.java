@@ -28,6 +28,7 @@ public class SkrbnikService {
     public List<Osoba> getAllOsobaSkrbnik(){
         return osobaService.getAllOsoba();
     }
+    public List<Skrbnik> getAllSkrbnik() {return skrbnikRepository.findAll();}
     public boolean isSkrbnik(Long osobaid){
         return skrbnikRepository.existsSkrbnikByOsobaId(osobaid);
     }

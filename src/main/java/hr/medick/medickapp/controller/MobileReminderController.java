@@ -9,7 +9,10 @@ import hr.medick.medickapp.service.PodsjetnikService;
 import hr.medick.medickapp.service.TerapijaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,7 @@ public class MobileReminderController {
     }
 
     @PostMapping()
-    public ResponseEntity <List<Podsjetnik>> getAllRemindersForPacijent(@RequestBody Osoba osoba) {
+    public ResponseEntity<List<Podsjetnik>> getAllRemindersForPacijent(@RequestBody Osoba osoba) {
 
         Pacijent pacijent = getPacijentByOsoba(osoba);
 
@@ -37,7 +40,7 @@ public class MobileReminderController {
 
         List<Podsjetnik> podjsetnikList = new ArrayList<>();
 
-        for (Terapija terapija : terapijaList){
+        for (Terapija terapija : terapijaList) {
             podjsetnikList.add(getPodsjetnik(terapija));
         }
 
