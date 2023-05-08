@@ -31,7 +31,7 @@ public class EditSkrbnikController {
     @PostMapping("/saveSkrbnik")
     public String saveSkrbnik(@ModelAttribute Skrbnik skrbnik){
 
-        Skrbnik skrbnikSave = skrbnikService.getSkrbnikByEmail(skrbnik.getOsoba().getEmail());
+        Skrbnik skrbnikSave = skrbnikService.getSkrbnikById(skrbnik.getId());
         Osoba osoba = skrbnik.getOsoba();
         skrbnikSave.getOsoba().setIme(osoba.getIme());
         skrbnikSave.getOsoba().setPrezime(osoba.getPrezime());
@@ -43,6 +43,4 @@ public class EditSkrbnikController {
 
         return "redirect:/viewSkrbnik";
     }
-
-
 }
