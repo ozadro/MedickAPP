@@ -70,8 +70,8 @@
                     </excludes>
                 </configuration>
             </plugin>
-
         </plugins>
+        <finalName>spring-app-docker</finalName>
     </build>
     <repositories>
         <repository>
