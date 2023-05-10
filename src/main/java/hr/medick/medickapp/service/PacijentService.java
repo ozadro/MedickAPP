@@ -29,8 +29,8 @@ public class PacijentService {
         return osobaService.getAllOsoba();
     }
 
-    public boolean isPacijent(Long osobaid) {
-        return pacijentRepository.existsPacijentByOsobaId(osobaid);
+    public boolean isPacijent(Long osobaId) {
+        return pacijentRepository.existsPacijentByOsobaId(osobaId);
     }
 
     public List<Pacijent> getAllPacijent(){return pacijentRepository.findAll();}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/saveSkrbnik}" th:object="${skrbnik}" method="post">
+<div>
+    <input type="hidden" th:field="*{id}"/>
+    <label>Ime: </label>
+    <input type="text" th:field="*{osoba.ime}" />
+</div>
+    <div>
+    <label>Prezime: </label>
+    <input type="text"  th:field="*{osoba.prezime}" />
+    </div>
+    <div>
+     <label>Email: </label>
+      <input type="text" th:field="*{osoba.email}" />
+    </div>
+    <div>
+      <label>Telefon: </label>
+      <input type="number" th:field="*{osoba.telefon}" />
+    </div>
+    <div>
+     <label>Adresa: </label>
+      <input type="text" th:field="*{osoba.adresaStanovanja}" />
+    </div>
+<input type="submit" value="Submit" />
+</form>
+</body>
+</html>
