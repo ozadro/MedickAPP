@@ -12,4 +12,5 @@ public interface OsobaRepository extends JpaRepository<Osoba, Long> {
         List<Osoba> findOsobasByIme(String query);
         List<Osoba> findOsobasByPrezime(String query);
         List<Osoba> findOsobasByImeAndPrezime(String ime, String prezime);
+        Boolean existsOsobaByEmail(String email);
 }
