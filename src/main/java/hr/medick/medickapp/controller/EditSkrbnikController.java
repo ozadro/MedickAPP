@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class EditSkrbnikController {
-
-
     private final SkrbnikService skrbnikService;
 
     public EditSkrbnikController(SkrbnikService skrbnikService) {
@@ -25,7 +23,6 @@ public class EditSkrbnikController {
         model.addAttribute("skrbnik", skrbnik);
 
         return "editSkrbnik";
-
     }
 
     @PostMapping("/saveSkrbnik")

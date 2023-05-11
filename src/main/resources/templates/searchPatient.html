@@ -10,34 +10,38 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div>
 
-    <div th:replace="~{fragments/navigation :: navbar}"></div>
+<div th:replace="~{fragments/navigation :: navbar}"></div>
 
-  <h2>Search Patient: </h2>
-  <form th:action="@{/foundPatient}" method="post">
-      <label>
-          <input type="text" name="keyword"  placeholder="Pretaži pacijenta po imenu ili prezimenu"/>
-      </label>
-      <button type="submit">Pretraži</button>
-  </form>
-  <table>
-      <tr th:each="o : ${osobaList}">
-          <td th:text="${o.ime}"></td>
-          <td th:text="${o.prezime}"></td>
-          <td th:text="${o.telefon}"></td>
-          <td th:text="${o.email}"></td>
-          <td>
-              <form th:action="@{/savePatient}" method="post">
-                  <input type="hidden" name="email" th:value="${o.email}"/>
-                  <button type="submit">Dodaj</button>
-              </form>
-          </td>
-      </tr>
-  </table>
-      <p th:text="${error}"></p>
-      <p th:text="${errorMissing}"></p>
-      <p th:text="${msg}"></p>
-</div>
+<section id="searchFormSection">
+    <div id="searchFormContainer">
+        <!--        <div class="row d-flex justify-content-center align-items-center h-100">-->
+        <h2>Search Patient: </h2>
+        <form th:action="@{/foundPatient}" method="post">
+            <label>
+                <input type="text" class="form-control" name="keyword"
+                       placeholder="Pretaži pacijenta po imenu ili prezimenu"/>
+            </label>
+            <button type="submit">Pretraži</button>
+        </form>
+        <table>
+            <tr th:each="o : ${osobaList}">
+                <td th:text="${o.ime}"></td>
+                <td th:text="${o.prezime}"></td>
+                <td th:text="${o.telefon}"></td>
+                <td th:text="${o.email}"></td>
+                <td>
+                    <form th:action="@{/savePatient}" method="post">
+                        <input type="hidden" name="email" th:value="${o.email}"/>
+                        <button type="submit">Dodaj</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <p th:text="${error}"></p>
+        <p th:text="${errorMissing}"></p>
+        <p th:text="${msg}"></p>
+    </div>
+</section>
 </body>
 </html>
