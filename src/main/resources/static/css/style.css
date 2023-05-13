@@ -19,3 +19,27 @@ body {
     font-weight: bold;
     color: rgba(0, 0, 0, 0.73);
 }
+
+#searchFormSection{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+}
+#searchFormContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+}
+#searchFormContainer form{
+    display: flex;
+    width: 100%;
+}
+#searchFormContainer input{
+    flex: 9.3;
+}
+#searchFormContainer button{
+    flex: 0.7;
+}
