@@ -11,23 +11,26 @@
 </head>
 <body>
 <div>
-
     <div th:replace="~{fragments/navigation :: navbar}"></div>
 
-    <table>
-        <tr th:each="o : ${osobaList}">
-            <td th:text="${o.ime}"></td>
-            <td th:text="${o.prezime}"></td>
-            <td th:text="${o.telefon}"></td>
-            <td th:text="${o.email}"></td>
-            <td>
-                <form th:action="@{/viewPatient}" method="get">
-                    <input type="hidden" name="show" th:value="${o.email}"/>
-                    <button type="submit" >Pregled Pacijenta</button>
+    <section id="showPatientSection">
+        <div id="showPatientContainer">
+            <h1>Pregled pacijenata</h1>
+            <div class="greyLine"></div>
+            <div id="patientCardContianer">
+                <form class="card" style="width: 18rem;" th:action="@{/viewPatient}" method="get"
+                      th:each="o : ${osobaList}">
+                    <button id="patientCard" type="submit">
+                        <h5 class="card-title" th:text="${o.ime} + ' ' + ${o.prezime}"></h5>
+                        <h6 class="card-subtitle mb-4 text-muted" th:text="${o.adresaStanovanja}"></h6>
+                        <p class="card-text mb-2" th:text="'tel: ' + ${o.telefon}"></p>
+                        <p class="card-text mb-2" th:text="${o.email}"></p>
+                    </button>
                 </form>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </section>
+
 </div>
 </body>
 </html>
