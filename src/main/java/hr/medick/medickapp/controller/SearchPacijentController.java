@@ -10,15 +10,13 @@ import hr.medick.medickapp.service.SkrbnikPacijentService;
 import hr.medick.medickapp.service.SkrbnikService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@SessionAttributes({"emptySearchFlag", "osobaList"})
 public class SearchPacijentController {
     private final PacijentService pacijentService;
     private final OsobaService osobaService;
@@ -33,37 +31,40 @@ public class SearchPacijentController {
     }
 
     @GetMapping("/searchPatient")
-    public String searchIndex(Model model){
-        List<Osoba> osobaList = new ArrayList<>();
+    public String searchIndex(Model model) {
+        if (!model.containsAttribute("emptySearchFlag") || (Boolean) model.getAttribute("emptySearchFlag")) {
+            List<Osoba> osobaList = new ArrayList<>();
             for (Pacijent pacijent : pacijentService.getAllPacijent()) {
                 osobaList.add(pacijent.getOsoba());
             }
-            model.addAttribute("osobaList",osobaList);
+            model.addAttribute("osobaList", osobaList);
+        }
 
         return "searchPatient";
     }
 
     @PostMapping("/foundPatient")
-    public String searchPatient(@ModelAttribute("keyword")String keyword, Model model){
+    public String searchPatient(@ModelAttribute("keyword") String keyword, Model model) {
         String errorMsg = "Unijeli ste nepostojećeg pacijenta, pokušajte ponovno.";
+        model.addAttribute("emptySearchFlag", true);
 
         try {
             if (keyword.isEmpty()) {
                 model.addAttribute("errorMissing", "Unesite podatke o pacijentu.");
             } else {
                 List<Osoba> people = new ArrayList<>();
-                for (Osoba osoba : osobaService.getOsobaByIme(keyword.trim())){
-                    if (pacijentService.isPacijent(osoba.getId())){
+                for (Osoba osoba : osobaService.getOsobaByIme(keyword.trim())) {
+                    if (pacijentService.isPacijent(osoba.getId())) {
                         people.add(osoba);
                     }
                 }
-                for (Osoba osoba : osobaService.getOsobaByPrezime(keyword.trim())){
-                    if (pacijentService.isPacijent(osoba.getId())){
+                for (Osoba osoba : osobaService.getOsobaByPrezime(keyword.trim())) {
+                    if (pacijentService.isPacijent(osoba.getId())) {
                         people.add(osoba);
                     }
                 }
 
-               String[] splitKeyword = keyword.split(" ");
+                String[] splitKeyword = keyword.split(" ");
                 if (splitKeyword.length >= 2) {
                     for (Osoba osoba : osobaService.getOsobasByImeAndPrezime(splitKeyword[0], splitKeyword[1])) {
                         if (pacijentService.isPacijent(osoba.getId())) {
@@ -71,24 +72,22 @@ public class SearchPacijentController {
                         }
                     }
                 }
-                if (!people.isEmpty()){
-                    for (Osoba osoba : people){
-                        model.addAttribute("osobaList", osoba);
-                    }
-                }else {
+                if (!people.isEmpty()) {
+                        model.addAttribute("osobaList", people);
+                        model.addAttribute("emptySearchFlag", false);
+                } else {
                     model.addAttribute("error", errorMsg);
                 }
             }
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             model.addAttribute("error", errorMsg);
         }
-    return "searchPatient";
-}
+        return "redirect:/searchPatient";
+    }
 
 
     @PostMapping("/savePatient")
-    public String savePatient(@RequestParam("email")String email, Model model){
+    public String savePatient(@RequestParam("email") String email, Model model) {
         Pacijent pacijent = pacijentService.findPacijentByOsobaEmail(email);
         Skrbnik skrbnik = skrbnikService.getAllSkrbnik().get(0);
         SkrbnikPacijent skrbnikPacijent = new SkrbnikPacijent();
@@ -96,11 +95,11 @@ public class SearchPacijentController {
         skrbnikPacijent.setPacijent(pacijent);
         skrbnikPacijent.setSkrbnik(skrbnik);
 
-        if (!skrbnikPacijentService.existsSkrbnikPacijentByPacijentId(pacijent.getId())){
+        if (!skrbnikPacijentService.existsSkrbnikPacijentByPacijentId(pacijent.getId())) {
             skrbnikPacijentService.saveSkrbnikPacijent(skrbnikPacijent);
-        }else{
+        } else {
             String msg = "Odabrani pacijent ima skrbnika!";
-            model.addAttribute("msg",msg);
+            model.addAttribute("msg", msg);
         }
         return "searchPatient";
     }

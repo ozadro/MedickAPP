@@ -2,6 +2,11 @@ spring:
   application:
     alias: MEDICK
     version: '@project.version@'
+  thymeleaf:
+    cache: false
+  devtools:
+    restart:
+      enabled: true
   main:
     banner-mode: OFF
   datasource:
