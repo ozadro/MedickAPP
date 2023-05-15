@@ -18,12 +18,12 @@
     <div id="searchFormContainer">
         <!--        <div class="row d-flex justify-content-center align-items-center h-100">-->
         <h2>Search Patient: </h2>
-        <form th:action="@{/foundPatient}" method="post">
+        <form id="searchForm" th:action="@{/foundPatient}" method="post">
             <input type="text" class="form-control" name="keyword"
                    placeholder="Pretaži pacijenta po imenu ili prezimenu"/>
             <button class="btn" type="submit"><i class="fa fa-search"></i></button>
         </form>
-        <table>
+        <table class="table table-hover">
             <tr th:each="o : ${osobaList}">
                 <td th:text="${o.ime}"></td>
                 <td th:text="${o.prezime}"></td>
@@ -32,7 +32,7 @@
                 <td>
                     <form th:action="@{/savePatient}" method="post">
                         <input type="hidden" name="email" th:value="${o.email}"/>
-                        <button type="submit">Dodaj</button>
+                        <button class="btn bg-danger" type="submit">Dodaj</button>
                     </form>
                 </td>
             </tr>
