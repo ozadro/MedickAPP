@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface PacijentRepository extends JpaRepository<Pacijent, Long> {
     boolean existsPacijentByOsobaId(Long id);
 
-    Pacijent findPacijentById(Long id);
+    Pacijent findPacijentByOsobaId(Long id);
 
     Pacijent findPacijentByOsoba(Osoba osoba);
 }

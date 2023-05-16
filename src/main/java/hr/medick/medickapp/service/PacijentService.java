@@ -40,7 +40,7 @@ public class PacijentService {
     }
 
     public Pacijent getPacijentById(Long id){
-        return pacijentRepository.findPacijentById(id);
+        return pacijentRepository.findPacijentByOsobaId(id);
     }
 
     public Pacijent findPacijentByOsobaEmail(String email){
