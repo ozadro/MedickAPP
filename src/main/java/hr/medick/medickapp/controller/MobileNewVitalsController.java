@@ -21,6 +21,7 @@ public class MobileNewVitalsController {
     boolean secondTimeSaveSameVital = false;
     private final PacijentService pacijentService;
     private final VitaliService vitaliService;
+    private Vitali newVital = new Vitali();
 
     public MobileNewVitalsController(PacijentService pacijentService, VitaliService vitaliService) {
         this.pacijentService = pacijentService;
@@ -35,26 +36,24 @@ public class MobileNewVitalsController {
             @RequestParam("krvnitlak") String krvnitlak,
             @RequestParam("osobaPacijentId") String osobaPacijentId) {
 
-        Vitali vital = new Vitali();
-
         if (!secondTimeSaveSameVital) {
 
             Pacijent pacijent = getPacijentFromId(osobaPacijentId);
 
-            vital.setPacijent(pacijent);
-            vital.setGlukozaukrvi(glukozaukrvi);
-            vital.setKrvnitlak(krvnitlak);
-            vital.setDatummjerenja(new Date());
+            newVital.setPacijent(pacijent);
+            newVital.setGlukozaukrvi(glukozaukrvi);
+            newVital.setKrvnitlak(krvnitlak);
+            newVital.setDatummjerenja(new Date());
 
-            vitaliService.saveVitals(vital);
+            vitaliService.saveVitals(newVital);
 
             secondTimeSaveSameVital = true;
 
-            return new ResponseEntity<>(vital, HttpStatus.OK);
+            return new ResponseEntity<>(newVital, HttpStatus.OK);
         }
         secondTimeSaveSameVital = false;
 
-        return new ResponseEntity<>(vital, HttpStatus.OK);
+        return new ResponseEntity<>(newVital, HttpStatus.OK);
 
     }
 
