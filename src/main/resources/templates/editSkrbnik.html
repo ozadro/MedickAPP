@@ -10,32 +10,41 @@
           crossorigin="anonymous">
 </head>
 <body>
-
 <div th:replace="~{fragments/navigation :: navbar}"></div>
-<form th:action="@{/saveSkrbnik}" th:object="${skrbnik}" method="post">
-    <div>
-        <input type="hidden" th:field="*{id}"/>
-        <label>Ime: </label>
-        <input type="text" th:field="*{osoba.ime}"/>
+
+<section id="editCarerSection">
+    <div id="showCarerContainer">
+        <h1>Uredi Profil</h1>
+        <div id="editCarerCard" class="card">
+            <form th:action="@{/saveSkrbnik}" th:object="${skrbnik}" method="post">
+                <div class="form-group mb-3">
+                    <label for="imeInput">Ime: </label>
+                    <input type="text" class="form-control" id="imeInput" th:field="*{osoba.ime}"/>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="prezimeInput">Prezime: </label>
+                    <input type="text" class="form-control" id="prezimeInput" th:field="*{osoba.prezime}"/>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="emailInput">Email: </label>
+                    <input type="text" class="form-control" id="emailInput" th:field="*{osoba.email}"/>
+                </div>
+                <div class="form-grou mb-3">
+                    <label for="telefonInput">Telefon: </label>
+                    <input type="text" class="form-control" id="telefonInput" th:field="*{osoba.telefon}"/>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="adresaStanovanjaInput">Adresa: </label>
+                    <!--        <input type="hidden" th:field="*{id}"/>-->
+                    <input type="text" class="form-control" id="adresaStanovanjaInput"
+                           th:field="*{osoba.adresaStanovanja}"/>
+                </div>
+                <input type="submit" value="Submit" class="btn bg-danger text-white"/>
+            </form>
+        </div>
     </div>
-    <div>
-        <label>Prezime: </label>
-        <input type="text" th:field="*{osoba.prezime}"/>
-    </div>
-    <div>
-        <label>Email: </label>
-        <input type="text" th:field="*{osoba.email}"/>
-    </div>
-    <div>
-        <label>Telefon: </label>
-        <input type="number" th:field="*{osoba.telefon}"/>
-    </div>
-    <div>
-        <label>Adresa: </label>
-        <input type="text" th:field="*{osoba.adresaStanovanja}"/>
-    </div>
-    <input type="submit" value="Submit"/>
-</form>
+</section>
+
 
 </body>
 </html>

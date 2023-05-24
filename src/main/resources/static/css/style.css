@@ -3,44 +3,120 @@ body {
 }
 
 
-#mainRegisterBtn{
+#mainRegisterBtn {
     background-color: #ff4141;
     width: 100%;
 }
+
 .registerInputField > input {
     padding: 15px;
 }
-#mainRegisterDiv  p{
+
+#mainRegisterDiv p {
     margin-top: 15px;
     color: rgba(0, 0, 0, 0.73);
     text-align: center;
 }
-#mainRegisterDiv  a{
+
+#mainRegisterDiv a {
     font-weight: bold;
     color: rgba(0, 0, 0, 0.73);
 }
 
-#searchFormSection{
+/*SEARCH*/
+#searchFormSection {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-top: 20px;
 }
-#searchFormContainer{
+
+#searchFormContainer {
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 50%;
 }
-#searchForm{
+
+#searchForm {
     display: flex;
     width: 100%;
     margin-top: 40px;
 }
-#searchFormContainer input{
+
+#searchFormContainer input {
     flex: 9.3;
 }
-#searchFormContainer button{
+
+#searchFormContainer button {
     flex: 0.7;
+}
+
+#searchFormContainer form button {
+    float: right;
+}
+
+#searchFormContainer table {
+    margin-top: 20px;
+}
+
+/*SHOW PATIENT*/
+#showPatientSection {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+#showPatientContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+}
+#showPatientContainer h1{
+    margin-bottom: 20px;
+}
+#patientCard {
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    text-align: left;
+}
+
+#patientCard:hover {
+    background-color: silver;
+}
+.greyLine{
+    height: 1px;
+    width: 100%;
+    background-color: grey;
+}
+#patientCardContianer{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+/*EDIT CARER*/
+#editCarerSection {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+#showCarerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+}
+#editCarerCard{
+    padding: 20px 40px;
 }

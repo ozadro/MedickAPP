@@ -27,7 +27,6 @@
             <tr th:each="o : ${osobaList}">
                 <td th:text="${o.ime}"></td>
                 <td th:text="${o.prezime}"></td>
-                <td th:text="${o.telefon}"></td>
                 <td th:text="${o.email}"></td>
                 <td>
                     <form th:action="@{/savePatient}" method="post">
