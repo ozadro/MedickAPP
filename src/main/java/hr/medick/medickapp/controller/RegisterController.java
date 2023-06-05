@@ -3,6 +3,8 @@ package hr.medick.medickapp.controller;
 import hr.medick.medickapp.model.Osoba;
 import hr.medick.medickapp.model.Skrbnik;
 import hr.medick.medickapp.service.SkrbnikService;
+import jakarta.validation.Valid;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +29,11 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String saveOsoba(@ModelAttribute("newOsoba") Osoba osoba, Model model) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(osoba.getLozinka());
-        osoba.setLozinka(encodedPassword);
+    public String saveOsoba(@ModelAttribute("newOsoba") @Valid Osoba osoba, Model model) {
+
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        String encodedPassword = passwordEncoder.encode(osoba.getLozinka());
+//        osoba.setLozinka(encodedPassword);
         Skrbnik skrbnik = new Skrbnik(osoba);
 
         Osoba osobaWithEmail = skrbnikService.getOsobaWithEmail(osoba.getEmail());

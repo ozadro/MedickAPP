@@ -3,6 +3,7 @@ package hr.medick.medickapp.service;
 import hr.medick.medickapp.model.Osoba;
 import hr.medick.medickapp.model.Skrbnik;
 import hr.medick.medickapp.repository.SkrbnikRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
