@@ -17,7 +17,7 @@
     <div class="column w-100">
         <h1 class="mb-3">Registracija</h1>
 
-        <form class="w-100" method="post" action="/register" th:object="${newOsoba}">
+        <form class="w-100" method="post" th:action="@{/register}" th:object="${newOsoba}">
             <div class="input-group registerInputField mb-2">
                 <input type="text" class="form-control" name="ime" placeholder="Ime" aria-label="Ime" aria-describedby="ime-field" required>
             </div>
