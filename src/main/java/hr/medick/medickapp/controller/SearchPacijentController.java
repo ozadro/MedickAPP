@@ -10,13 +10,14 @@ import hr.medick.medickapp.service.SkrbnikPacijentService;
 import hr.medick.medickapp.service.SkrbnikService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"emptySearchFlag", "osobaList"})
+@SessionAttributes({"emptySearchFlag", "osobaList", "email"})
 public class SearchPacijentController {
     private final PacijentService pacijentService;
     private final OsobaService osobaService;
@@ -87,9 +88,10 @@ public class SearchPacijentController {
 
 
     @PostMapping("/savePatient")
-    public String savePatient(@RequestParam("email") String email, Model model) {
+    public String savePatient(@RequestParam("email") String email, Model model, ModelMap modelMap) {
         Pacijent pacijent = pacijentService.findPacijentByOsobaEmail(email);
-        Skrbnik skrbnik = skrbnikService.getAllSkrbnik().get(0);
+        Skrbnik skrbnik = skrbnikService.getSkrbnikByEmail((String)modelMap.get("email"));
+        model.getAttribute("email");
         SkrbnikPacijent skrbnikPacijent = new SkrbnikPacijent();
 
         skrbnikPacijent.setPacijent(pacijent);

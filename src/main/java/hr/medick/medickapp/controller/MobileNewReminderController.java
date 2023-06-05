@@ -27,6 +27,7 @@ public class MobileNewReminderController {
     private final TerapijaService terapijaService;
     private final PacijentService pacijentService;
     private final PodsjetnikService podsjetnikService;
+    private Podsjetnik newPodsjetnik = new Podsjetnik();
 
     public MobileNewReminderController(LijekService lijekService, TerapijaService terapijaService, PacijentService pacijentService, PodsjetnikService podsjetnikService) {
         this.lijekService = lijekService;
@@ -45,7 +46,6 @@ public class MobileNewReminderController {
             @RequestParam("datumPrvogUzimanja") String datumPrvogUzimanja,
             @RequestParam("osobaPacijentId") String osobaPacijentId
     ) throws ParseException {
-        Podsjetnik podsjetnik = new Podsjetnik();
 
         if (!secondTimeSaveSamePacijent) {
 
@@ -57,19 +57,19 @@ public class MobileNewReminderController {
 
             Terapija newTerapija = saveNewTerapija(lijek, pacijent, dozaLijeka, satiRazmaka, putaDnevno, tableta, datumPrvogUzimanja);
 
-            podsjetnik.setTerapija(newTerapija);
-            podsjetnik.setUzet(false);
+            newPodsjetnik.setTerapija(newTerapija);
+            newPodsjetnik.setUzet(false);
 
-            podsjetnikService.savePodsjetnik(podsjetnik);
+            podsjetnikService.savePodsjetnik(newPodsjetnik);
 
             secondTimeSaveSamePacijent = true;
 
-            return new ResponseEntity<>(podsjetnik, HttpStatus.OK);
+            return new ResponseEntity<>(newPodsjetnik, HttpStatus.OK);
         }
 
         secondTimeSaveSamePacijent = false;
 
-        return new ResponseEntity<>(podsjetnik, HttpStatus.OK);
+        return new ResponseEntity<>(newPodsjetnik, HttpStatus.OK);
 
     }
 
