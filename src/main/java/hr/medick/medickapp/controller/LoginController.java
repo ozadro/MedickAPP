@@ -33,32 +33,6 @@ public class LoginController {
         return "login";
     }
 
-//    @PostMapping("/login")
-    public String authOsoba(@RequestParam("email") String email, @RequestParam("password") String lozinka, Model model){
-        List<Osoba> osobaList = skrbnikService.getAllOsobaSkrbnik();
-
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-        if (skrbnikList.isEmpty()) {
-            model.addAttribute("ErrorMessage", "Prijva neuspješna, pogrešni podaci o prijavi!");
-        } else {
-        for (Skrbnik skrbnik : skrbnikList) {
-            Osoba trazenaOsoba = skrbnik.getOsoba();
-            if (trazenaOsoba.getEmail().trim().equals(email.trim()) && passwordEncoder.matches(lozinka.trim(), trazenaOsoba.getLozinka().trim())) {
-                if (skrbnikService.isSkrbnik(trazenaOsoba.getId())){
-                    modelMap.put("email",trazenaOsoba.getEmail());
-                return "redirect:/main";
-                }
-            } else {
-                model.addAttribute("ErrorMessage", "Prijva neuspješna, pogrešni podaci o prijavi!");
-                model.addAttribute("Message", "");
-            }
-        }
-    }
-
-        return "login";
-    }
-
     @GetMapping("/login-error")
     public String login(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);

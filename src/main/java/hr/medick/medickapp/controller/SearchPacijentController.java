@@ -8,6 +8,8 @@ import hr.medick.medickapp.service.OsobaService;
 import hr.medick.medickapp.service.PacijentService;
 import hr.medick.medickapp.service.SkrbnikPacijentService;
 import hr.medick.medickapp.service.SkrbnikService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -90,8 +92,11 @@ public class SearchPacijentController {
     @PostMapping("/savePatient")
     public String savePatient(@RequestParam("email") String email, Model model, ModelMap modelMap) {
         Pacijent pacijent = pacijentService.findPacijentByOsobaEmail(email);
-        Skrbnik skrbnik = skrbnikService.getSkrbnikByEmail((String)modelMap.get("email"));
-        model.getAttribute("email");
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        Skrbnik skrbnik = skrbnikService.getSkrbnikByEmail(currentPrincipalName);
+
         SkrbnikPacijent skrbnikPacijent = new SkrbnikPacijent();
 
         skrbnikPacijent.setPacijent(pacijent);

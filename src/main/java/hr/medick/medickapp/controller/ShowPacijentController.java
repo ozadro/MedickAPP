@@ -5,6 +5,8 @@ import hr.medick.medickapp.model.Pacijent;
 import hr.medick.medickapp.model.Skrbnik;
 import hr.medick.medickapp.service.SkrbnikPacijentService;
 import hr.medick.medickapp.service.SkrbnikService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,7 +29,9 @@ public class ShowPacijentController {
     @GetMapping("/showPatient")
     public String showPatient(Model model, ModelMap modelMap){
         List<Osoba> osobaList = new ArrayList<>();
-        Skrbnik skrbnik = skrbnikService.getSkrbnikByEmail((String)modelMap.get("email"));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        Skrbnik skrbnik = skrbnikService.getSkrbnikByEmail(currentPrincipalName);
         List<Pacijent> pacijentList =  skrbnikPacijentService.getAllPacijentsForSkrbnik(skrbnik.getId());
         for (Pacijent pacijent : pacijentList) {
             osobaList.add(pacijent.getOsoba());
