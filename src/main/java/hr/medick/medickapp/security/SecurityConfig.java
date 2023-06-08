@@ -24,6 +24,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -59,17 +60,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http/*, AuthenticationManager authManager*/) throws Exception {
-        http
+        http.cors().and().csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/resources/**",
                                 "/static/**", "/webjars/**", "/login",
                                 "/register", "/css/**", "/js/**")
                         .permitAll()
-                        .anyRequest().authenticated()
-                        .requestMatchers(HttpMethod.POST,
-                                "/mobileRegister", "/mobileReminders", "/mobileVitals", "/mobileVitals",
-                                "/mobileSaveNewVitals", "/mobileSaveNewReminder", "/mobileLogin", "/mobileEditPacijent")
-                        .permitAll()
+                        .requestMatchers(HttpMethod.POST).permitAll()
                         .anyRequest().authenticated()
                 )//.authenticationManager(authManager)
                 .formLogin((form) -> form
