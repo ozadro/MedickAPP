@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -55,15 +56,19 @@ public class SecurityConfig {
 
         return authenticationManagerBuilder.build();
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http/*, AuthenticationManager authManager*/) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(  "/resources/**",
+                        .requestMatchers("/resources/**",
                                 "/static/**", "/webjars/**", "/login",
-                                "/register", "/css/**", "/js/**",
-                                "/mobileRegister","/mobileReminders","/mobileVitals","/mobileVitals",
-                                "/mobileSaveNewVitals","/mobileSaveNewReminder","/mobileLogin","/mobileEditPacijent")
+                                "/register", "/css/**", "/js/**")
+                        .permitAll()
+                        .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.POST,
+                                "/mobileRegister", "/mobileReminders", "/mobileVitals", "/mobileVitals",
+                                "/mobileSaveNewVitals", "/mobileSaveNewReminder", "/mobileLogin", "/mobileEditPacijent")
                         .permitAll()
                         .anyRequest().authenticated()
                 )//.authenticationManager(authManager)
