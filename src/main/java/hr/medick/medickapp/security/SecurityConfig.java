@@ -61,7 +61,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(  "/resources/**",
                                 "/static/**", "/webjars/**", "/login",
-                                "/register", "/css/**", "/js/**")
+                                "/register", "/css/**", "/js/**",
+                                "/mobileRegister","/mobileReminders","/mobileVitals","/mobileVitals",
+                                "/mobileSaveNewVitals","/mobileSaveNewReminder","/mobileLogin","/mobileEditPacijent")
                         .permitAll()
                         .anyRequest().authenticated()
                 )//.authenticationManager(authManager)

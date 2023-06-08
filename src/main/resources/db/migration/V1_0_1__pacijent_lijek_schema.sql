@@ -31,3 +31,5 @@ create table if not exists podsjetnik(
     terapijaid int references terapija(idterapija) not null,
     uzet boolean not null
 );
+
+
