@@ -21,9 +21,9 @@ public class MobileRegisterController {
     @PostMapping()
     public ResponseEntity<String> savePacijent(@RequestBody Osoba osoba)
     {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(osoba.getLozinka());
-        osoba.setLozinka(encodedPassword);
+        //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        //String encodedPassword = passwordEncoder.encode(osoba.getLozinka());
+        //osoba.setLozinka(encodedPassword);
         Pacijent pacijent = new Pacijent(osoba);
 
         Osoba osobaWithEmail = pacijentService.getOsobaWithEmail(osoba.getEmail());

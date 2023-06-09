@@ -27,6 +27,8 @@ public class MobileLoginController {
         Osoba osoba = new Osoba();
 
             for (Osoba trazenaOsoba : osobaList) {
+                boolean istina1 = trazenaOsoba.getEmail().trim().equals(email.trim());
+                boolean istina2 = passwordEncoder.matches(lozinka.trim(), trazenaOsoba.getLozinka().trim());
                 if (trazenaOsoba.getEmail().trim().equals(email.trim()) && passwordEncoder.matches(lozinka.trim(), trazenaOsoba.getLozinka().trim())) {
                     if (pacijentService.isPacijent(trazenaOsoba.getId())){
                         osoba = trazenaOsoba;
