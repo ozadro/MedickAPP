@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Entity
@@ -33,5 +35,9 @@ public class Vitali {
         this.glukozaukrvi = glukozaukrvi;
         this.krvnitlak = krvnitlak;
         this.datummjerenja = datummjerenja;
+    }
+    public LocalDate getDatumMjerenjaDate(){
+        return datummjerenja.toInstant().atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 }

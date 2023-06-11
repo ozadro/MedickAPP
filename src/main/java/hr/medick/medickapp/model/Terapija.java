@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 
@@ -36,4 +38,8 @@ public class Terapija {
     @Column(name = "kolicinadnevno")
     private int kolicinadnevno;
 
+    public LocalDate getPrvaDozaDate(){
+        return prvadoza.toInstant().atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
 }

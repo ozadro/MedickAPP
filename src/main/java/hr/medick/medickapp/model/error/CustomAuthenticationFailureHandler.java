@@ -1,4 +1,4 @@
-package hr.medick.medickapp.error;
+package hr.medick.medickapp.model.error;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

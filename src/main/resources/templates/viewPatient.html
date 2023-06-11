@@ -10,23 +10,57 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div>
+<div th:replace="~{fragments/navigation :: navbar}"></div>
+<section id="searchFormSection">
+    <div id="searchFormContainer">
 
-    <div th:replace="~{fragments/navigation :: navbar}"></div>
+        <div th:object="${pacijent}">
+            <h4 th:text="*{getOsoba().ime + ' ' +getOsoba().prezime} "></h4>
+        </div>
+        <div class="greyLine"></div>
+        <div class="row w-100">
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
+                    <th colspan="6">Terapija</th>
+                    </thead>
+                    <thead>
+                    <th>Naziv</th>
+                    <th>Doza</th>
+                    <th>Datum prve doze</th>
+                    <th>Kolicina dnevno</th>
+                    <th>Kolicina tablete</th>
+                    <th>Ponovo popiti</th>
+                    </thead>
+                    <tr th:each="t : ${terapija}">
+                        <td th:text="${t.getLijek().getNaziv()}"></td>
+                        <td th:text="${t.getDozalijeka()}"></td>
+                        <td th:text="${t.getPrvaDozaDate()}"></td>
+                        <td th:text="${t.getKolicinadnevno()}"></td>
+                        <td th:text="${t.getKolicinatableta()}"></td>
+                        <td th:text="${t.getPonavljanja()}"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col">
+                <table class="table table-hover">
+                    <thead>
+                    <th colspan="6">Vitali</th>
+                    </thead>
+                    <th>Glukoza</th>
+                    <th>Krvni tlak</th>
+                    <th>Datum prve doze</th>
+                    </thead>
+                    <tr th:each="v : ${vitali}">
+                        <td th:text="${v.glukozaukrvi}"></td>
+                        <td th:text="${v.krvnitlak}"></td>
+                        <td th:text="${v.getDatumMjerenjaDate}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-    <div th:object="${pacijent}">
-        <h4 th:text="*{getOsoba().ime + ' ' +getOsoba().prezime} "></h4>
     </div>
-  <table>
-        <tr th:each="t : ${terapija}">
-             <td th:text="${t.getLijek().getNaziv()}"></td>
-             <td th:text="${t.getPrvadoza()}"></td>
-             <td th:text="${t.getDozalijeka()}"></td>
-             <td th:text="${t.getKolicinadnevno()}"></td>
-              <td th:text="${t.getKolicinatableta()}"></td>
-             <td th:text="${t.getPonavljanja()}"></td>
-        </tr>
-  </table>
-</div>
+</section>
 </body>
 </html>
